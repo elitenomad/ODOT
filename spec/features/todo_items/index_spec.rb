@@ -28,7 +28,7 @@ describe TodoItem do
     item3 = todo_list.todo_items.create(content:'have to play cricket')
     visit_todo_list(todo_list)
 
-    expect(page.all("table.table tr").size).to eq(3)
+    expect(page.all("table.todo_items tr").size).to eq(3)
 
   end
 end
