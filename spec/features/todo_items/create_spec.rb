@@ -18,4 +18,12 @@ describe 'Creating Todo List Items' do
     expect(page).to have_content('Added todo item')
     expect(todo_list.todo_items.count).to eq(1)
   end
+
+  it "should fail to save todo item with a invalid content" do
+    click_link 'New Todo Item'
+    fill_in 'Content', with: ''
+    click_button 'Save'
+    expect(page).to have_content('Content')
+    expect(todo_list.todo_items.count).to eq(0)
+  end
 end
