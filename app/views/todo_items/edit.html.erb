@@ -1,8 +1,2 @@
-<%= form_for [@todo_list,@todo_item] do |f| %>
-    <div class="field">
-      <%= f.label :content %>
-      <%= f.text_field :content %>
-    </div>
-
-    <%= f.submit 'Save' %>
-<% end %>
+<h1>Edit item</h1>
+<%= render 'todo_items/form' %>

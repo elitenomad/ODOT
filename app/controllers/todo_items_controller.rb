@@ -1,16 +1,17 @@
 class TodoItemsController < ApplicationController
+
+  before_action :todo_list_fetch
+  before_action :todo_item_fetch , only: [:edit,:update,:destroy]
+
   def index
-    @todo_list = TodoList.find(params[:todo_list_id])
     @todo_items = @todo_list.todo_items
   end
 
   def new
-    @todo_list = TodoList.find(params[:todo_list_id])
     @todo_item = @todo_list.todo_items.new
   end
 
   def create
-    @todo_list = TodoList.find(params[:todo_list_id])
     @todo_item = @todo_list.todo_items.new(todo_item_params)
 
     if @todo_item.save
@@ -21,13 +22,9 @@ class TodoItemsController < ApplicationController
   end
 
   def edit
-    @todo_list = TodoList.find(params[:todo_list_id])
-    @todo_item = @todo_list.todo_items.find(params[:id])
   end
 
   def update
-    @todo_list = TodoList.find(params[:todo_list_id])
-    @todo_item = @todo_list.todo_items.find(params[:id])
     if @todo_item.update(todo_item_params)
       redirect_to todo_list_todo_items_path(@todo_list), notice: 'Updated todo item sucessfully'
     else
@@ -36,15 +33,20 @@ class TodoItemsController < ApplicationController
   end
 
   def destroy
-    @todo_list = TodoList.find(params[:todo_list_id])
-    @todo_item = @todo_list.todo_items.find(params[:id])
-
     @todo_item.destroy
     redirect_to todo_list_todo_items_path(@todo_list)
   end
 
 
   private
+
+    def todo_list_fetch
+      @todo_list = TodoList.find(params[:todo_list_id])
+    end
+
+    def todo_item_fetch
+      @todo_item = @todo_list.todo_items.find(params[:id])
+    end
 
     def todo_item_params
       params.require(:todo_item).permit(:content)
