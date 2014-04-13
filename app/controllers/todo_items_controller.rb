@@ -1,7 +1,7 @@
 class TodoItemsController < ApplicationController
 
   before_action :todo_list_fetch
-  before_action :todo_item_fetch , only: [:edit,:update,:destroy]
+  before_action :todo_item_fetch , only: [:edit,:update,:destroy,:complete]
 
   def index
     @todo_items = @todo_list.todo_items
@@ -37,7 +37,11 @@ class TodoItemsController < ApplicationController
     redirect_to todo_list_todo_items_path(@todo_list)
   end
 
-
+  def complete
+    @todo_item.update(completed_at: Time.now)
+    flash[:notice] = "Todo item marked complete"
+    redirect_to todo_list_todo_items_path(@todo_list)
+  end
   private
 
     def todo_list_fetch

@@ -8,6 +8,7 @@
             <td><%= item.content %></td>
             <td><%= link_to 'Edit Item', edit_todo_list_todo_item_path(@todo_list,item) %></td>
             <td><%= link_to 'Delete Item', todo_list_todo_item_path(@todo_list,item), method: :delete%></td>
+            <td><%= link_to 'Mark Complete', complete_todo_list_todo_item_path(@todo_list,item), method: :patch %></td>
           </tr>
       <% end %>
     </table>
