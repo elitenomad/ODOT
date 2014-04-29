@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140413014254) do
+ActiveRecord::Schema.define(version: 20140429103137) do
 
   create_table "todo_items", force: true do |t|
     t.integer  "todo_list_id"
@@ -26,6 +26,15 @@ ActiveRecord::Schema.define(version: 20140413014254) do
   create_table "todo_lists", force: true do |t|
     t.string   "title"
     t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", force: true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
